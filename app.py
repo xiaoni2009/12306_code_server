@@ -5,7 +5,10 @@ import flask
 import numpy as np
 from PIL import Image, ImageFile
 from verify import pretreatment
-import tflite_runtime.interpreter as tflite
+import tensorflow as tf
+# tflite_runtime这个包只有linux的，官网说可以用上面的tensorflow代替
+# https://tensorflow.google.cn/lite/guide/python?hl=zh-tw&authuser=0
+# import tflite_runtime.interpreter as tflite
 
 app = flask.Flask(__name__)
 # 模型的全局变量
@@ -23,7 +26,7 @@ def load_model():
     '''
     global textModel
     global imgModel
-    textModel = tflite.Interpreter(
+    textModel = tf.lite.Interpreter(
         'text.model.tflite')
     textModel.allocate_tensors()
     imgModel = tflite.Interpreter(
