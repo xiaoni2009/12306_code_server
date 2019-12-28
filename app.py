@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image, ImageFile
 from verify import pretreatment
 import tensorflow as tf
-# tflite_runtime这个包只有linux的，官网说可以用上面的tensorflow代替
+# tflite_runtime这个包只有linux的，官网说可以用上面的tensorflow代替。然后替换tflite引用为tf.lite
 # https://tensorflow.google.cn/lite/guide/python?hl=zh-tw&authuser=0
 # import tflite_runtime.interpreter as tflite
 
@@ -29,7 +29,7 @@ def load_model():
     textModel = tf.lite.Interpreter(
         'text.model.tflite')
     textModel.allocate_tensors()
-    imgModel = tflite.Interpreter(
+    imgModel = tf.lite.Interpreter(
         'image.model.tflite')
     imgModel.allocate_tensors()
 
